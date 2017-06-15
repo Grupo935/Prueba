@@ -16,7 +16,7 @@ public class Asistente extends Usuario
     
     public Asistente(String ID, String usuario, String contrasena, String nombre, String apellido, String restauranteId) 
     {
-        super(usuario, contrasena, ID, nombre, apellido);
+        super(ID,usuario, contrasena, nombre, apellido);
         this.restauranteId = restauranteId;
     } 
 }

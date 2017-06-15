@@ -12,12 +12,12 @@ package catalogo;
  */
 public class Platillo 
 {
-    String ID, nombre, descripcion, servido, tipo, ingredientes, categoriaId, restauranteId;
+    String ID, nombre, descripcion, servido, tipo, ingredientes, categoria, restauranteId;
  
 
     public Platillo(String ID, String nombre, String restauranteId, String servido, String tipo, String ingredientes, String descripcion, String categoriaId) {
         this.nombre = nombre;
-        this.categoriaId = categoriaId;
+        this.categoria = categoria;
         this.restauranteId = restauranteId;
         this.descripcion = descripcion;
         this.servido = servido;
@@ -30,8 +30,8 @@ public class Platillo
         return nombre;
     }
 
-    public String getCategoriaId() {
-        return categoriaId;
+    public String getCategoria() {
+        return categoria;
     }
 
     public String getDescripcion() {
@@ -64,8 +64,8 @@ public class Platillo
         this.nombre = nombre;
     }
 
-    public void setCategoriaId(String categoriaId) {
-        this.categoriaId = categoriaId;
+    public void setCategoriaId(String categoria) {
+        this.categoria = categoria;
     }
 
     public void setDescripcion(String descripcion) {
