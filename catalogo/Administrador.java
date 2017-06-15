@@ -15,8 +15,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement (name = "Administrador")
 public class Administrador extends Usuario
 {
-    public Administrador(String usuario, String contrasena, Restaurante restaurante) 
+    public Administrador(String usuario, String contrasena, String ID, String nombre, String apellido) 
     {
-        super(usuario, contrasena);
+        super(usuario, contrasena, ID, nombre, apellido);
     }
 }

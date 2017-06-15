@@ -20,9 +20,7 @@ public class Main extends Application {
 		Scene scene=new Scene(principal.getRoot());
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Catalogo Espol");
-		primaryStage.show();
-		
-		
+		primaryStage.show();	
 	}
 
 }

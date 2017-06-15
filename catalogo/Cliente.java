@@ -14,8 +14,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement (name = "Cliente")
 public class Cliente extends Usuario
 {  
-    public Cliente(String usuario, String contrasena) 
+    public Cliente(String usuario, String contrasena, String ID, String nombre, String apellido) 
     {
-        super(usuario, contrasena);
+        super(usuario, contrasena, ID, nombre, apellido);
     }  
 }

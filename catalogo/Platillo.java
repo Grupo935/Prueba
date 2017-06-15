@@ -15,23 +15,26 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement (name = "Platillo")
 public class Platillo 
 {
-    String nombre, descripcion, servido, tipo, ingredientes, categoria;
+    Restaurante restaurante;
+    Categoria categoria;
+    String ID, nombre, descripcion, servido, tipo, ingredientes;
  
 
-    public Platillo(String nombre, String categoria, String descripcion, String servido, String tipo, String ingredientes) {
+    public Platillo(String nombre, Categoria categoria, String descripcion, String servido, String tipo, String ingredientes, String ID) {
         this.nombre = nombre;
         this.categoria = categoria;
         this.descripcion = descripcion;
         this.servido = servido;
         this.tipo = tipo;
         this.ingredientes = ingredientes;
+        this.ID = ID;
     }
     @XmlElement (name = "nombre")
     public String getNombre() {
         return nombre;
     }
     @XmlElement (name = "categoria")
-    public String getCategoria() {
+    public Categoria getCategoria() {
         return categoria;
     }
     @XmlElement (name = "descripcion")
@@ -50,12 +53,22 @@ public class Platillo
     public String getIngredientes() {
         return ingredientes;
     }
+    @XmlElement (name = "restaurante")
+    public Restaurante getRestaurante() {
+        return restaurante;
+    }
+    @XmlElement (name = "ID")
+    public String getID() {
+        return ID;
+    }
+    
+    
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
 
@@ -73,5 +86,13 @@ public class Platillo
 
     public void setIngredientes(String ingredientes) {
         this.ingredientes = ingredientes;
+    }
+
+    public void setRestaurante(Restaurante restaurante) {
+        this.restaurante = restaurante;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
     }
 }

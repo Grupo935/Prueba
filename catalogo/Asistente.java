@@ -15,8 +15,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement (name = "Asistente")
 public class Asistente extends Usuario
 {
-    public Asistente(String usuario, String contrasena) 
+    Restaurante restaurante;
+    
+    public Asistente(String usuario, String contrasena, String ID, String nombre, String apellido, Restaurante restaurante) 
     {
-        super(usuario, contrasena);
+        super(usuario, contrasena, ID, nombre, apellido);
+        this.restaurante = restaurante;
     } 
 }
