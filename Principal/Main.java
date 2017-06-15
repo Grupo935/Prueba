@@ -17,9 +17,9 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
 		VentanaPrincipalView principal= new VentanaPrincipalView ();
-		Scene scene=new Scene(principal.getRoot(),1280,720);
+		Scene scene=new Scene(principal.getRoot());
 		primaryStage.setScene(scene);
-		primaryStage.setTitle("Mapa ESPOL");
+		primaryStage.setTitle("Calago Espol");
 		primaryStage.show();
 		
 		

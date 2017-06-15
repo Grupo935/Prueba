@@ -1,5 +1,5 @@
 package Principal;
-import InicioSesion.InicioSesionView;
+import Menus.InicioSesionView;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -19,9 +19,10 @@ public class VentanaPrincipalView {
 	
 	public VentanaPrincipalView(){
 		contenedorPrincipal=new Pane();
-		contenedorPrincipal.setPrefSize(1280, 720);
+		//contenedorPrincipal.setPrefSize(1280, 720);
 		sesion= new InicioSesionView();
 		contenedorPrincipal.getChildren().add(sesion.getRoot());
+		
 		
 		
 	}
