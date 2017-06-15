@@ -5,59 +5,55 @@
  */
 package catalogo;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Ana Belen
  */
-@XmlRootElement (name = "Platillo")
 public class Platillo 
 {
-    Restaurante restaurante;
-    Categoria categoria;
-    String ID, nombre, descripcion, servido, tipo, ingredientes;
+    String ID, nombre, descripcion, servido, tipo, ingredientes, categoriaId, restauranteId;
  
 
-    public Platillo(String nombre, Categoria categoria, String descripcion, String servido, String tipo, String ingredientes, String ID) {
+    public Platillo(String ID, String nombre, String restauranteId, String servido, String tipo, String ingredientes, String descripcion, String categoriaId) {
         this.nombre = nombre;
-        this.categoria = categoria;
+        this.categoriaId = categoriaId;
+        this.restauranteId = restauranteId;
         this.descripcion = descripcion;
         this.servido = servido;
         this.tipo = tipo;
         this.ingredientes = ingredientes;
         this.ID = ID;
     }
-    @XmlElement (name = "nombre")
+
     public String getNombre() {
         return nombre;
     }
-    @XmlElement (name = "categoria")
-    public Categoria getCategoria() {
-        return categoria;
+
+    public String getCategoriaId() {
+        return categoriaId;
     }
-    @XmlElement (name = "descripcion")
+
     public String getDescripcion() {
         return descripcion;
     }
-    @XmlElement (name = "servido")
+
     public String getServido() {
         return servido;
     }
-    @XmlElement (name = "tipo")
+
     public String getTipo() {
         return tipo;
     }
-    @XmlElement (name = "ingredientes")
+
     public String getIngredientes() {
         return ingredientes;
     }
-    @XmlElement (name = "restaurante")
-    public Restaurante getRestaurante() {
-        return restaurante;
+
+    public String getRestauranteId() {
+        return restauranteId;
     }
-    @XmlElement (name = "ID")
+
     public String getID() {
         return ID;
     }
@@ -68,8 +64,8 @@ public class Platillo
         this.nombre = nombre;
     }
 
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
+    public void setCategoriaId(String categoriaId) {
+        this.categoriaId = categoriaId;
     }
 
     public void setDescripcion(String descripcion) {
@@ -88,11 +84,11 @@ public class Platillo
         this.ingredientes = ingredientes;
     }
 
-    public void setRestaurante(Restaurante restaurante) {
-        this.restaurante = restaurante;
+    public void setRestauranteId(String restauranteId) {
+        this.restauranteId = restauranteId;
     }
 
     public void setID(String ID) {
         this.ID = ID;
-    }
+    }   
 }

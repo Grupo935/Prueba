@@ -5,17 +5,14 @@
  */
 package catalogo;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Ana Belen
  */
-@XmlRootElement (name = "Administrador")
 public class Administrador extends Usuario
 {
-    public Administrador(String usuario, String contrasena, String ID, String nombre, String apellido) 
+    public Administrador(String ID, String usuario, String contrasena, String nombre, String apellido) 
     {
         super(usuario, contrasena, ID, nombre, apellido);
     }

@@ -5,21 +5,18 @@
  */
 package catalogo;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Ana Belen
  */
-@XmlRootElement (name = "Asistente")
 public class Asistente extends Usuario
 {
-    Restaurante restaurante;
+    String restauranteId;
     
-    public Asistente(String usuario, String contrasena, String ID, String nombre, String apellido, Restaurante restaurante) 
+    public Asistente(String ID, String usuario, String contrasena, String nombre, String apellido, String restauranteId) 
     {
         super(usuario, contrasena, ID, nombre, apellido);
-        this.restaurante = restaurante;
+        this.restauranteId = restauranteId;
     } 
 }

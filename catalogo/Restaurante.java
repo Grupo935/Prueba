@@ -5,70 +5,61 @@
  */
 package catalogo;
 
-import java.util.LinkedList;
-
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Ana Belen
  */
-@XmlRootElement (name = "Restaurante")
+
 public class Restaurante 
 {
-    Asistente asistente;
-    LinkedList<Platillo> platillos;
-    String direccion, ID, telefono, duenio;
+    String nombre, direccion, ID, telefono, duenio, asistenteId;
     
 
-    public Restaurante(Asistente asistente, String direccion, String ID, String telefono, String duenio) 
+    public Restaurante(String ID, String nombre, String asistenteId, String direccion, String telefono, String duenio) 
     {
-        this.asistente = asistente;
-        this.platillos = null;
+        this.asistenteId = asistenteId;
         this.direccion = direccion;
         this.ID = ID;
         this.telefono = telefono;
         this.duenio = duenio;
+        this.nombre = nombre;
        
     }
 
-    @XmlElement (name = "asistente")
-    public Asistente getAsistente() {
-        return asistente;
+
+    public String getAsistenteId() {
+        return asistenteId;
     }
-    @XmlElement (name = "platillos")
-    public LinkedList<Platillo> getPlatillos() {
-        return platillos;
-    }
-    @XmlElement (name = "direccion")
+
     public String getDireccion() {
         return direccion;
     }
-    @XmlElement (name = "ID")
+
     public String getID() {
         return ID;
     }
-    @XmlElement (name = "telefono")
+
     public String getTelefono() {
         return telefono;
     }
-    @XmlElement (name = "duenio")
+
     public String getDuenio() {
         return duenio;
     }
-   
 
-    public void setAsistentes(Asistente asistente) {
-        this.asistente = asistente;
+    public String getNombre() {
+        return nombre;
+    }
+    
+    
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public void setPlatillos(LinkedList<Platillo> platillos) {
-        this.platillos = platillos;
-    }
-
-    public void setAsistente(Asistente asistente) {
-        this.asistente = asistente;
+    public void setAsistenteId(String asistenteId) {
+        this.asistenteId = asistenteId;
     }
 
     public void setDireccion(String direccion) {
@@ -85,8 +76,5 @@ public class Restaurante
 
     public void setDuenio(String duenio) {
         this.duenio = duenio;
-    }
-
-    
-   
+    } 
 }
