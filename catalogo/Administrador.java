@@ -15,20 +15,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement (name = "Administrador")
 public class Administrador extends Usuario
 {
-    Restaurante restaurante;
-
     public Administrador(String usuario, String contrasena, Restaurante restaurante) 
     {
         super(usuario, contrasena);
-        this.restaurante = restaurante;
     }
-    @XmlElement (name = "restaurante")
-	public Restaurante getRestaurante() {
-		return restaurante;
-	}
-
-	public void setRestaurante(Restaurante restaurante) {
-		this.restaurante = restaurante;
-	}  
-    
 }

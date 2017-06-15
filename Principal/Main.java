@@ -19,7 +19,7 @@ public class Main extends Application {
 		VentanaPrincipalView principal= new VentanaPrincipalView ();
 		Scene scene=new Scene(principal.getRoot());
 		primaryStage.setScene(scene);
-		primaryStage.setTitle("Calago Espol");
+		primaryStage.setTitle("Catalogo Espol");
 		primaryStage.show();
 		
 		

@@ -59,7 +59,7 @@ public class InicioSesionView {
                         Scene vrs=new Scene(vr.getRoot());
                         Stage stage= (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
                         stage.setScene(vrs);
-		    	System.out.println("pase por aqui");
+		    	System.out.println("Pase por aqui");
 		    	
 		    }});
 		contenedorBotones= new HBox();
