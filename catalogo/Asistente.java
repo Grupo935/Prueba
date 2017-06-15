@@ -19,4 +19,14 @@ public class Asistente extends Usuario
         super(ID,usuario, contrasena, nombre, apellido);
         this.restauranteId = restauranteId;
     } 
+
+    public String getRestauranteId() {
+        return restauranteId;
+    }
+
+    public void setRestauranteId(String restauranteId) {
+        this.restauranteId = restauranteId;
+    }
+    
+    
 }
