@@ -25,7 +25,7 @@ public class VentanaRegistroView {
     private Label labelUsuario,labelPSW;
     private TextField textUsuario,textPSW;
     private Button registrar,regresar;
-    private ChoiceBox categoria;
+    private ChoiceBox<String> categoriaUsuario;
   public   VentanaRegistroView(){
         root=new GridPane();
         crearNodes();
@@ -36,26 +36,43 @@ public class VentanaRegistroView {
     }
     private void crearNodes(){
         labelUsuario=new Label("Nombre de Usuario");
-        labelPSW=new Label("ContraseÃ±a");
-        categoria=new ChoiceBox(FXCollections.observableArrayList(
+        labelPSW=new Label("Contraseña");
+        categoriaUsuario=new ChoiceBox(FXCollections.observableArrayList(
 			    "Asistente", "Cliente", "Administrador"));
         textUsuario=new TextField();
         textPSW=new TextField();
         registrar=new Button("Registrar");
         regresar=new Button("Regresar");
     }
+    private void crearUsuario(String tipo){
+       switch(tipo){
+           case "Asistente":{
+               
+           };break;
+           case "Cliente":{
+               
+           };break;
+           case "Administrador":{
+               
+           };break;
+           
+       }
+       //añadir al csv
+    }
     private void colocarNodes(){
         root.add(labelUsuario, 0, 0);
         root.add(textUsuario, 1, 0);
         root.add(labelPSW, 0, 1);
         root.add(textPSW, 1, 1);
-        root.add(categoria, 0, 2);
+        root.add(categoriaUsuario, 0, 2);
         root.add(registrar, 0, 3);
         root.add(regresar, 1, 3);
             }
     private void colocarEvents(){
        registrar.setOnAction(e->{
+           crearUsuario(categoriaUsuario.getValue());
             
+                    e.consume();
         });
         regresar.setOnAction(e->{
             Stage stage= (Stage) ((Node) e.getSource()).getScene().getWindow();
