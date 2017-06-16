@@ -1,6 +1,8 @@
 package Menus;
+import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -15,6 +17,15 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.util.LinkedList;
+
+import ProcesoDeDatos.CargaAsistentes;
+import ProcesoDeDatos.CargaCliente;
+import ProcesoDeDatos.CargaAdministrador;
+import catalogo.Asistente;
+import catalogo.Cliente;
+import catalogo.Administrador;
 
 public class InicioSesionView {
 	Pane contenedorGlobal;
@@ -23,7 +34,7 @@ public class InicioSesionView {
 	Label userText,passText;
 	TextField usuario,password;
 	Button aceptar,registrar;
-
+	ChoiceBox tipoUsers;    
 	public InicioSesionView(){
 		crearContenido();
 		
@@ -34,10 +45,69 @@ public class InicioSesionView {
 		usuario=new TextField();
 		password=new TextField();
                 //aqui se verifica si el usuario pertenece y posteriormente se acccede al menu del tipo de usaurio
-                
+        tipoUsers= new ChoiceBox(FXCollections.observableArrayList(
+			    "Asistente", "Cliente", "Administrador"));
 		aceptar= new Button("Aceptar");
 		aceptar.setOnMouseClicked(new EventHandler<MouseEvent>() {
 		    public void handle(MouseEvent mouseEvent) {
+		    	if (mouseEvent.getButton().equals(MouseButton.PRIMARY)){
+		    		if(tipoUsers.getValue().equals("Asistente")){
+			    		try {
+							LinkedList<Asistente> asistentes= CargaAsistentes.cargaDatos();
+							for(int i=0;i<asistentes.size();i++){
+								System.out.println(asistentes.get(i).getUsuario()+" "+asistentes.get(i).getContrasena());
+								if (usuario.getText().equals(asistentes.get(i).getUsuario()) && password.getText().equals(asistentes.get(i).getContrasena())){
+									System.out.println("inicio de sesion exitoso");
+									// aqui va la transicion de ventana de loggin a la ventana para el asistente
+								}
+							}
+							
+							
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+			    		
+			    	}
+			    	if(tipoUsers.getValue().equals("Cliente")){
+			    		try {
+							LinkedList<Cliente> clientes= CargaCliente.cargaDatos();
+							for(int i=0;i<clientes.size();i++){
+								if (usuario.getText().equals(clientes.get(i).getUsuario()) && password.getText().equals(clientes.get(i).getContrasena())){
+									System.out.println("inicio de sesion exitoso");
+									// aqui va la transicion de ventana de loggin a la ventana para el Cliente
+								}
+							}
+							
+							
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+			    		
+			    	}
+			    	if(tipoUsers.getValue().equals("Administrador")){
+			    		try {
+							LinkedList<Administrador> administradores= CargaAdministrador.cargaDatos();
+							for(int i=0;i<administradores.size();i++){
+								if (usuario.getText().equals(administradores.get(i).getUsuario()) && password.getText().equals(administradores.get(i).getContrasena())){
+									System.out.println("inicio de sesion exitoso");
+									// aqui va la transicion de ventana de loggin a la ventana para el asistente
+								}
+							}
+							
+							
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+			    		
+			    	}
+		    		
+		    	}
+		    	
+		    	
+		    	
 		   /* 	System.out.println("pase por aqui");
 		    */	
                    
@@ -71,6 +141,7 @@ public class InicioSesionView {
 		contenedor.getChildren().add(usuario);
 		contenedor.getChildren().add(passText);
 		contenedor.getChildren().add(password);
+		contenedor.getChildren().add(tipoUsers);
 		contenedor.getChildren().add(contenedorBotones);
 		
 		

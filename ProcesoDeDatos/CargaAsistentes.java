@@ -19,11 +19,11 @@ public class CargaAsistentes {
    
     public static LinkedList<Asistente> cargaDatos() throws FileNotFoundException, IOException{
         LinkedList<Asistente> asistentes= new LinkedList<Asistente>();
-        CSVReader reader = new CSVReader(new FileReader("src/CSV/Asistentes.csv"));
+        CSVReader reader = new CSVReader(new FileReader("src/CSV/Asistentes.csv"),';');
         String [] nextLine;
      while ((nextLine = reader.readNext()) != null) {
         // nextLine[] is an array of values from the line
-        System.out.println(nextLine[0]);
+        System.out.println(nextLine[0]+" "+nextLine.length);
         Asistente asis=new Asistente(nextLine[0],nextLine[1],nextLine[2],nextLine[3],nextLine[4],nextLine[5]);
         asistentes.add(asis);
      }

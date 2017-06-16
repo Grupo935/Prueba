@@ -19,7 +19,7 @@ import java.util.LinkedList;
 public class CargaPlatillos {
      public static LinkedList<Platillo> cargaDatos() throws FileNotFoundException, IOException{
         LinkedList<Platillo> platillos = new LinkedList<Platillo>();
-        CSVReader reader = new CSVReader(new FileReader("src/CSV/Platillos.csv"));
+        CSVReader reader = new CSVReader(new FileReader("src/CSV/Platillos.csv"),';');
         String [] nextLine;
      while ((nextLine = reader.readNext()) != null) {
         // nextLine[] is an array of values from the line

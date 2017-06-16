@@ -20,7 +20,7 @@ import java.util.LinkedList;
 public class CargaCliente {
     public static LinkedList<Cliente> cargaDatos() throws FileNotFoundException, IOException{
         LinkedList<Cliente> clientes= new LinkedList<Cliente>();
-        CSVReader reader = new CSVReader(new FileReader("src/CSV/Clientes.csv"));
+        CSVReader reader = new CSVReader(new FileReader("src/CSV/Clientes.csv"),';');
         String [] nextLine;
      while ((nextLine = reader.readNext()) != null) {
         // nextLine[] is an array of values from the line
