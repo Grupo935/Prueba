@@ -10,9 +10,10 @@ import catalogo.Platillo;
 import com.opencsv.CSVReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.LinkedList;
-
+import com.opencsv.CSVWriter;
 /**
  *
  * @author Ana Belen
@@ -32,5 +33,14 @@ public class CargaPlatillos {
      System.out.println(platillos.get(0).getCategoria());        
      return platillos;
     }
+	public static void guardarPlatillo(Platillo platillo) throws IOException{
+		String[] entries = { platillo.getID(), platillo.getNombre(), platillo.getRestauranteId(), platillo.getServido(),platillo.getTipo(),platillo.getIngredientes(),platillo.getDescripcion(),platillo.getCategoria() }; 
+       
+        try (CSVWriter writer = new CSVWriter(new FileWriter("src/CSV/Platillos.csv",true),';')) {
+            writer.writeNext(entries);
+        }        
+		
+		
+	}
     
 }

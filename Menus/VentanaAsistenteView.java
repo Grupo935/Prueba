@@ -109,7 +109,7 @@ debe mostrar el submen� correspondiente
               Label  servidoInfo=new  Label(platillo.getServido());
               Label  tipoInfo=new  Label(platillo.getTipo());
               //nombre de restaurante?
-              
+            
               Label restauranteInfo=new Label(platillo.getRestauranteId());
               Label ingredientesInfo=new Label(platillo.getIngredientes());
               Label descripcionInfo=new Label(platillo.getDescripcion());
@@ -173,9 +173,9 @@ Descripci�n, Servido {Caliente, Fr�o}, Tipo {Aperitivo, Plato fuerte, Postre
 Im�genes. El restaurante debe tomarlo autom�ticamente de la informaci�n del asistente de
 restaurante*/
         GridPane contenedor=new GridPane();
-        Label nombrePlatilloLabel,categoriaLabel,descripcionLabel,servidoLabel,tipoPlatilloLabel,ingredientesLabel;
+        Label nombrePlatilloLabel,categoriaLabel,descripcionLabel,servidoLabel,tipoPlatilloLabel,ingredientesLabel,platilloID;
         ChoiceBox<String> servidoCBox,tipoCBox;
-        TextField nombreTF,categoriaTF,ingredientesTF,descripcionTF;
+        TextField nombreTF,categoriaTF,ingredientesTF,descripcionTF,platilloIDTF;
         Button regresar,guardar;
         regresar=new Button("Regresar a menu");
         guardar=new Button("Guardar Platillo");
@@ -183,6 +183,8 @@ restaurante*/
         categoriaTF=new TextField();
         ingredientesTF=new TextField();
         descripcionTF=new TextField();
+        platilloIDTF=new TextField();
+        platilloID=new Label("ID del Platillo");
         nombrePlatilloLabel=new Label("Nombre del Platillo: ");
         categoriaLabel=new Label("categoria del Platillo: ");
         descripcionLabel=new Label("Descripcion del Platillo: ");
@@ -205,12 +207,20 @@ restaurante*/
         contenedor.add(tipoCBox, 1, 4);
         contenedor.add(ingredientesLabel, 0, 5);
         contenedor.add(ingredientesTF, 1 , 5);
-        contenedor.add(guardar, 0, 6);
-        contenedor.add(regresar, 1 , 6);
+        contenedor.add(platilloID, 0, 6);
+        contenedor.add(platilloIDTF, 1, 6);
+        contenedor.add(guardar, 0, 7);
+        contenedor.add(regresar, 1 , 7);
         
         guardar.setOnAction(e->{
        //codigo para guardar en csv, de seer posible un mensaje
-            
+        	Platillo plato= new Platillo(platilloIDTF.getText(),nombreTF.getText(),user.getRestauranteId(),servidoCBox.getValue(),tipoCBox.getValue(),ingredientesTF.getText(),descripcionTF.getText(),categoriaTF.getText());
+            try {
+				CargaPlatillos.guardarPlatillo(plato);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
             e.consume();
         
         });
