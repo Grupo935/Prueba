@@ -1,11 +1,16 @@
 package Menus;
 
 import Principal.VentanaPrincipalView;
+import ProcesoDeDatos.CargaPlatillos;
 import catalogo.Asistente;
 import catalogo.Platillo;
 import catalogo.Usuario;
+import java.io.IOException;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -29,7 +34,8 @@ import javafx.stage.Stage;
 public class VentanaAsistenteView implements MostrarPlatillo,OpcionesPlatillos{
     final private VBox root;
     private Asistente user;
-    private Button regresarLogin;
+    
+    private Button regresarLogin,agregarPlatillo,listarPlatillos;
     
     VentanaAsistenteView(Asistente user){
         this.user=user;
@@ -44,7 +50,7 @@ public class VentanaAsistenteView implements MostrarPlatillo,OpcionesPlatillos{
        /* agregarUsuario=new Button("Agregar Usuario");
         agregarUsuario.setOnAction(e->{
             Stage stage=new Stage();
-            stage.setTitle("A√±adir Usuario");
+            stage.setTitle("AÒadir Usuario");
             Scene svrv=new Scene((new VentanaRegistroView()).getRoot());
             stage.setScene(svrv);
             stage.show();
@@ -52,6 +58,15 @@ public class VentanaAsistenteView implements MostrarPlatillo,OpcionesPlatillos{
             e.consume();
         });**/
         regresarLogin=new Button("Regresar a Login");
+        agregarPlatillo=new Button("Agregar Platillo");
+        agregarPlatillo.setOnAction(e->{
+           
+            Stage stage= (Stage) ((Node) e.getSource()).getScene().getWindow();
+            Scene svp=new Scene(agregarPlatillo());
+            stage.setScene(svp);
+            stage.show();
+            e.consume();
+        });
         regresarLogin.setOnAction(e->{
             Stage stage= (Stage) ((Node) e.getSource()).getScene().getWindow();
             Scene svp=new Scene((new VentanaPrincipalView()).getRoot());
@@ -59,16 +74,34 @@ public class VentanaAsistenteView implements MostrarPlatillo,OpcionesPlatillos{
             stage.show();
             e.consume();
         });
+        listarPlatillos=new Button("Mostrar Platillos");
+        listarPlatillos.setOnAction(e->{
+            try {
+                LinkedList<Platillo> platillos=CargaPlatillos.cargaDatos();
+                   Stage stage= (Stage) ((Node) e.getSource()).getScene().getWindow();
+                    Scene svp=new Scene(listarPlatillos(platillos));
+                    stage.setScene(svp);
+                    stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(VentanaAsistenteView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+     
+          e.consume();
+        });
         
-        root.getChildren().addAll(regresarLogin);
+        
+        root.getChildren().addAll(agregarPlatillo,listarPlatillos,regresarLogin);
+        root.setSpacing(10);
+        root.setAlignment(Pos.CENTER);
     }
 
    
     @Override
     public void mostrarPlatillo(Platillo platillo) {
       /*  Para mostrar un platillo primero se debe escoger uno de la lista anterior. Los datos a mostrar
-son: Nombre, Servido, Tipo, Restaurante, Categor√≠a, Ingredientes, Im√°genes, Descripci√≥n. Luego
-debe mostrar el submen√∫ correspondiente
+son: Nombre, Servido, Tipo, Restaurante, CategorÌa, Ingredientes, Im·genes, DescripciÛn. Luego
+debe mostrar el submen˙ correspondiente
 */
               VBox contenedorDetalle=new VBox();
               Label nombreInfo=new  Label(platillo.getNombre());
@@ -89,7 +122,7 @@ debe mostrar el submen√∫ correspondiente
     }
 
     @Override
-    public void listarPlatillo(LinkedList<Platillo> platillo) {
+    public GridPane listarPlatillos(LinkedList<Platillo> platillo) {
         Label nombreInfo,categoriaInfo,servidoInfo,tipoInfo;
         GridPane contenedorPlatillos=new GridPane();
         int i=0;
@@ -102,10 +135,10 @@ debe mostrar el submen√∫ correspondiente
                 categoriaInfo=new  Label(p.getCategoria());
                 servidoInfo=new  Label(p.getServido());
                 tipoInfo=new  Label(p.getTipo());
-                Button escoger=new Button ("Seleccionar");
+                Button escoger=new Button ("Mas Detalle");
                 contenedorDetalle.getChildren().addAll(nombreInfo,categoriaInfo,servidoInfo,tipoInfo);
                 contenedorPlatillos.add(contenedorDetalle, 0, i);
-                contenedorPlatillos.add(escoger, 1, i);
+                contenedorPlatillos.add(escoger, 3, i);
                
                 
                 escoger.setOnAction(e->{
@@ -117,18 +150,27 @@ debe mostrar el submen√∫ correspondiente
                 
 //codigo para listar platillo
                 /*Se muestran todos los platillos que ofrece el restaurante asociado al asistente de restaurante.
-                  Los datos que se deben mostrar son: Nombre, Categor√≠a, Servido y Tipo. Luego se debe mostrar
-                  el submen√∫ correspondiente.*/
+                  Los datos que se deben mostrar son: Nombre, CategorÌa, Servido y Tipo. Luego se debe mostrar
+                  el submen˙ correspondiente.*/
             }
-        }
+        }Button regresar=new Button("Regresar al menu anterior");
+          regresar.setOnAction(e->{
+          Stage stage= (Stage) ((Node) e.getSource()).getScene().getWindow();
+          Scene svp=new Scene((new VentanaAsistenteView(user)).getRoot());
+          stage.setScene(svp);
+          stage.show();
+          e.consume();  
+        });
+        contenedorPlatillos.add(regresar, 0, i);
+        return contenedorPlatillos;
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public GridPane agregarPlatillo() {
-/*Se deben ingresar los siguientes campos para agregar un platillo nuevo: Nombre, Categor√≠a,
-Descripci√≥n, Servido {Caliente, Fr√≠o}, Tipo {Aperitivo, Plato fuerte, Postre}, Ingredientes e
-Im√°genes. El restaurante debe tomarlo autom√°ticamente de la informaci√≥n del asistente de
+/*Se deben ingresar los siguientes campos para agregar un platillo nuevo: Nombre, CategorÌa,
+DescripciÛn, Servido {Caliente, FrÌo}, Tipo {Aperitivo, Plato fuerte, Postre}, Ingredientes e
+Im·genes. El restaurante debe tomarlo autom·ticamente de la informaciÛn del asistente de
 restaurante*/
         GridPane contenedor=new GridPane();
         Label nombrePlatilloLabel,categoriaLabel,descripcionLabel,servidoLabel,tipoPlatilloLabel,ingredientesLabel;
@@ -176,7 +218,7 @@ restaurante*/
         
         regresar.setOnAction(e->{
           Stage stage= (Stage) ((Node) e.getSource()).getScene().getWindow();
-          Scene svp=new Scene(this.getRoot());
+          Scene svp=new Scene((new VentanaAsistenteView(user)).getRoot());
           stage.setScene(svp);
           stage.show();
           e.consume();  
