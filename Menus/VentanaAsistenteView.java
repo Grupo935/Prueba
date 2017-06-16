@@ -6,6 +6,7 @@ import catalogo.Asistente;
 import catalogo.Platillo;
 import catalogo.Usuario;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,6 +19,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -37,7 +39,7 @@ public class VentanaAsistenteView implements MostrarPlatillo,OpcionesPlatillos{
     
     private Button regresarLogin,agregarPlatillo,listarPlatillos;
     
-    VentanaAsistenteView(Asistente user){
+    VentanaAsistenteView(Asistente user) throws IOException{
         this.user=user;
         root=new VBox();
         crearBotones();
@@ -46,7 +48,7 @@ public class VentanaAsistenteView implements MostrarPlatillo,OpcionesPlatillos{
     public VBox getRoot(){
         return root;
     }
-    private void crearBotones(){
+    private void crearBotones() throws IOException{
        /* agregarUsuario=new Button("Agregar Usuario");
         agregarUsuario.setOnAction(e->{
             Stage stage=new Stage();
@@ -89,9 +91,38 @@ public class VentanaAsistenteView implements MostrarPlatillo,OpcionesPlatillos{
      
           e.consume();
         });
+        HBox categoriaSelect=new HBox();
+        ChoiceBox<String> categoriaCBox=new ChoiceBox(FXCollections.observableArrayList(obtenerCategorias()));
+        Button buscar=new Button("Buscar Categoria");
+        buscar.setOnAction(e->{
+            try {
+                LinkedList<Platillo> platillos=CargaPlatillos.cargaDatos();
+                LinkedList<Platillo> platillosCategoria=new LinkedList();
+                
+                for(Platillo p:platillos){
+                if(p.getCategoria().equals(categoriaCBox.getValue())){
+                    
+                    platillosCategoria.add(p);
+                }   
+                }
+                if(platillosCategoria.size()!=0){
+                    Stage stage= (Stage) ((Node) e.getSource()).getScene().getWindow();
+                    Scene svp=new Scene(listarPlatillos(platillosCategoria));
+                    stage.setScene(svp);
+                    stage.show();
+                    e.consume(); 
+                }
+                
+                e.consume();
+            } catch (IOException ex) {
+                    ex.printStackTrace();
+// Logger.getLogger(VentanaAsistenteView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            e.consume();
+        });
+        categoriaSelect.getChildren().addAll(buscar,categoriaCBox);
         
-        
-        root.getChildren().addAll(agregarPlatillo,listarPlatillos,regresarLogin);
+        root.getChildren().addAll(agregarPlatillo,categoriaSelect,listarPlatillos,regresarLogin);
         root.setSpacing(10);
         root.setAlignment(Pos.CENTER);
     }
@@ -121,7 +152,7 @@ debe mostrar el submen� correspondiente
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-  
+  @Override
     public GridPane listarPlatillos(LinkedList<Platillo> platillo) {
         Label nombreInfo,categoriaInfo,servidoInfo,tipoInfo;
         GridPane contenedorPlatillos=new GridPane();
@@ -138,7 +169,7 @@ debe mostrar el submen� correspondiente
                 Button escoger=new Button ("Mas Detalle");
                 contenedorDetalle.getChildren().addAll(nombreInfo,categoriaInfo,servidoInfo,tipoInfo);
                 contenedorPlatillos.add(contenedorDetalle, 0, i);
-                contenedorPlatillos.add(escoger, 3, i);
+                contenedorPlatillos.add(escoger, 1, i);
                
                 
                 escoger.setOnAction(e->{
@@ -156,10 +187,16 @@ debe mostrar el submen� correspondiente
         }Button regresar=new Button("Regresar al menu anterior");
           regresar.setOnAction(e->{
           Stage stage= (Stage) ((Node) e.getSource()).getScene().getWindow();
-          Scene svp=new Scene((new VentanaAsistenteView(user)).getRoot());
-          stage.setScene(svp);
+          Scene svp;
+            try {
+                svp = new Scene((new VentanaAsistenteView(user)).getRoot());
+                   stage.setScene(svp);
           stage.show();
-          e.consume();  
+          e.consume();
+            } catch (IOException ex) {
+                Logger.getLogger(VentanaAsistenteView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+         
         });
         contenedorPlatillos.add(regresar, 0, i);
         return contenedorPlatillos;
@@ -218,10 +255,16 @@ restaurante*/
         
         regresar.setOnAction(e->{
           Stage stage= (Stage) ((Node) e.getSource()).getScene().getWindow();
-          Scene svp=new Scene((new VentanaAsistenteView(user)).getRoot());
-          stage.setScene(svp);
+          Scene svp;
+            try {
+                svp = new Scene((new VentanaAsistenteView(user)).getRoot());stage.setScene(svp);
           stage.show();
           e.consume();  
+                
+            } catch (IOException ex) {
+                Logger.getLogger(VentanaAsistenteView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+          
         });
         return contenedor;
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -232,6 +275,14 @@ restaurante*/
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    
+    private ArrayList<String> obtenerCategorias() throws IOException{
+        ArrayList<String> listaCategoria=new ArrayList();
+        for(Platillo p:CargaPlatillos.cargaDatos()){
+            if(!listaCategoria.contains(p.getCategoria())){
+                listaCategoria.add(p.getCategoria());
+            }
+        }
+        return listaCategoria;
+    }
    
 }
