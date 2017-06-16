@@ -50,7 +50,7 @@ public class VentanaAsistenteView implements MostrarPlatillo,OpcionesPlatillos{
        /* agregarUsuario=new Button("Agregar Usuario");
         agregarUsuario.setOnAction(e->{
             Stage stage=new Stage();
-            stage.setTitle("Añadir Usuario");
+            stage.setTitle("Aï¿½adir Usuario");
             Scene svrv=new Scene((new VentanaRegistroView()).getRoot());
             stage.setScene(svrv);
             stage.show();
@@ -100,8 +100,8 @@ public class VentanaAsistenteView implements MostrarPlatillo,OpcionesPlatillos{
     @Override
     public void mostrarPlatillo(Platillo platillo) {
       /*  Para mostrar un platillo primero se debe escoger uno de la lista anterior. Los datos a mostrar
-son: Nombre, Servido, Tipo, Restaurante, Categoría, Ingredientes, Imágenes, Descripción. Luego
-debe mostrar el submenú correspondiente
+son: Nombre, Servido, Tipo, Restaurante, Categorï¿½a, Ingredientes, Imï¿½genes, Descripciï¿½n. Luego
+debe mostrar el submenï¿½ correspondiente
 */
               VBox contenedorDetalle=new VBox();
               Label nombreInfo=new  Label(platillo.getNombre());
@@ -121,7 +121,7 @@ debe mostrar el submenú correspondiente
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
+  
     public GridPane listarPlatillos(LinkedList<Platillo> platillo) {
         Label nombreInfo,categoriaInfo,servidoInfo,tipoInfo;
         GridPane contenedorPlatillos=new GridPane();
@@ -150,8 +150,8 @@ debe mostrar el submenú correspondiente
                 
 //codigo para listar platillo
                 /*Se muestran todos los platillos que ofrece el restaurante asociado al asistente de restaurante.
-                  Los datos que se deben mostrar son: Nombre, Categoría, Servido y Tipo. Luego se debe mostrar
-                  el submenú correspondiente.*/
+                  Los datos que se deben mostrar son: Nombre, Categorï¿½a, Servido y Tipo. Luego se debe mostrar
+                  el submenï¿½ correspondiente.*/
             }
         }Button regresar=new Button("Regresar al menu anterior");
           regresar.setOnAction(e->{
@@ -168,9 +168,9 @@ debe mostrar el submenú correspondiente
 
     @Override
     public GridPane agregarPlatillo() {
-/*Se deben ingresar los siguientes campos para agregar un platillo nuevo: Nombre, Categoría,
-Descripción, Servido {Caliente, Frío}, Tipo {Aperitivo, Plato fuerte, Postre}, Ingredientes e
-Imágenes. El restaurante debe tomarlo automáticamente de la información del asistente de
+/*Se deben ingresar los siguientes campos para agregar un platillo nuevo: Nombre, Categorï¿½a,
+Descripciï¿½n, Servido {Caliente, Frï¿½o}, Tipo {Aperitivo, Plato fuerte, Postre}, Ingredientes e
+Imï¿½genes. El restaurante debe tomarlo automï¿½ticamente de la informaciï¿½n del asistente de
 restaurante*/
         GridPane contenedor=new GridPane();
         Label nombrePlatilloLabel,categoriaLabel,descripcionLabel,servidoLabel,tipoPlatilloLabel,ingredientesLabel;
@@ -231,5 +231,7 @@ restaurante*/
     public void modificarPlatillo(Platillo platillo) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    
    
 }

@@ -7,6 +7,7 @@ package Menus;
 
 import catalogo.Platillo;
 import java.util.LinkedList;
+import javafx.scene.layout.GridPane;
 
 /**
  *
@@ -14,5 +15,5 @@ import java.util.LinkedList;
  */
 public interface MostrarPlatillo {
     public void mostrarPlatillo(Platillo platillo);
-    public void listarPlatillo(LinkedList<Platillo> platillo);
+    public GridPane listarPlatillos(LinkedList<Platillo> platillo);
 }
