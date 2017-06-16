@@ -52,7 +52,7 @@ public class VentanaAsistenteView implements MostrarPlatillo,OpcionesPlatillos{
        /* agregarUsuario=new Button("Agregar Usuario");
         agregarUsuario.setOnAction(e->{
             Stage stage=new Stage();
-            stage.setTitle("A�adir Usuario");
+            stage.setTitle("A?adir Usuario");
             Scene svrv=new Scene((new VentanaRegistroView()).getRoot());
             stage.setScene(svrv);
             stage.show();
@@ -131,8 +131,8 @@ public class VentanaAsistenteView implements MostrarPlatillo,OpcionesPlatillos{
     @Override
     public void mostrarPlatillo(Platillo platillo) {
       /*  Para mostrar un platillo primero se debe escoger uno de la lista anterior. Los datos a mostrar
-son: Nombre, Servido, Tipo, Restaurante, Categor�a, Ingredientes, Im�genes, Descripci�n. Luego
-debe mostrar el submen� correspondiente
+son: Nombre, Servido, Tipo, Restaurante, Categor?a, Ingredientes, Im?genes, Descripci?n. Luego
+debe mostrar el submen? correspondiente
 */
               VBox contenedorDetalle=new VBox();
               Label nombreInfo=new  Label(platillo.getNombre());
@@ -140,7 +140,7 @@ debe mostrar el submen� correspondiente
               Label  servidoInfo=new  Label(platillo.getServido());
               Label  tipoInfo=new  Label(platillo.getTipo());
               //nombre de restaurante?
-            
+              
               Label restauranteInfo=new Label(platillo.getRestauranteId());
               Label ingredientesInfo=new Label(platillo.getIngredientes());
               Label descripcionInfo=new Label(platillo.getDescripcion());
@@ -181,8 +181,8 @@ debe mostrar el submen� correspondiente
                 
 //codigo para listar platillo
                 /*Se muestran todos los platillos que ofrece el restaurante asociado al asistente de restaurante.
-                  Los datos que se deben mostrar son: Nombre, Categor�a, Servido y Tipo. Luego se debe mostrar
-                  el submen� correspondiente.*/
+                  Los datos que se deben mostrar son: Nombre, Categor?a, Servido y Tipo. Luego se debe mostrar
+                  el submen? correspondiente.*/
             }
         }Button regresar=new Button("Regresar al menu anterior");
           regresar.setOnAction(e->{
@@ -190,9 +190,9 @@ debe mostrar el submen� correspondiente
           Scene svp;
             try {
                 svp = new Scene((new VentanaAsistenteView(user)).getRoot());
-                   stage.setScene(svp);
-          stage.show();
-          e.consume();
+                stage.setScene(svp);
+                stage.show();
+                e.consume();
             } catch (IOException ex) {
                 Logger.getLogger(VentanaAsistenteView.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -205,23 +205,23 @@ debe mostrar el submen� correspondiente
 
     @Override
     public GridPane agregarPlatillo() {
-/*Se deben ingresar los siguientes campos para agregar un platillo nuevo: Nombre, Categor�a,
-Descripci�n, Servido {Caliente, Fr�o}, Tipo {Aperitivo, Plato fuerte, Postre}, Ingredientes e
-Im�genes. El restaurante debe tomarlo autom�ticamente de la informaci�n del asistente de
+/*Se deben ingresar los siguientes campos para agregar un platillo nuevo: Nombre, Categor?a,
+Descripci?n, Servido {Caliente, Fr?o}, Tipo {Aperitivo, Plato fuerte, Postre}, Ingredientes e
+Im?genes. El restaurante debe tomarlo autom?ticamente de la informaci?n del asistente de
 restaurante*/
         GridPane contenedor=new GridPane();
-        Label nombrePlatilloLabel,categoriaLabel,descripcionLabel,servidoLabel,tipoPlatilloLabel,ingredientesLabel,platilloID;
+        Label nombrePlatilloLabel,categoriaLabel,descripcionLabel,servidoLabel,tipoPlatilloLabel,ingredientesLabel,idLabel;
         ChoiceBox<String> servidoCBox,tipoCBox;
-        TextField nombreTF,categoriaTF,ingredientesTF,descripcionTF,platilloIDTF;
+        TextField nombreTF,categoriaTF,ingredientesTF,descripcionTF,idTF;
         Button regresar,guardar;
         regresar=new Button("Regresar a menu");
         guardar=new Button("Guardar Platillo");
+        idTF=new TextField();
         nombreTF=new TextField();
         categoriaTF=new TextField();
         ingredientesTF=new TextField();
         descripcionTF=new TextField();
-        platilloIDTF=new TextField();
-        platilloID=new Label("ID del Platillo");
+        idLabel=new Label("ID para el Platillo: ");
         nombrePlatilloLabel=new Label("Nombre del Platillo: ");
         categoriaLabel=new Label("categoria del Platillo: ");
         descripcionLabel=new Label("Descripcion del Platillo: ");
@@ -231,33 +231,40 @@ restaurante*/
         servidoCBox=new ChoiceBox(FXCollections.observableArrayList( "Caliente","Frio"));
         tipoCBox=new ChoiceBox(FXCollections.observableArrayList( "Aperitivo", "Plato fuerte", "Postre"));
         
-
-        contenedor.add(nombrePlatilloLabel, 0, 0);
-        contenedor.add(nombreTF, 1, 0);
-        contenedor.add(categoriaLabel, 0, 1);
-        contenedor.add(categoriaTF, 1, 1);
-        contenedor.add(descripcionLabel, 0, 2);
-        contenedor.add(descripcionTF, 1, 2);
-        contenedor.add(servidoLabel, 0, 3);
-        contenedor.add(servidoCBox, 1, 3);
-        contenedor.add(tipoPlatilloLabel, 0, 4);
-        contenedor.add(tipoCBox, 1, 4);
-        contenedor.add(ingredientesLabel, 0, 5);
-        contenedor.add(ingredientesTF, 1 , 5);
-        contenedor.add(platilloID, 0, 6);
-        contenedor.add(platilloIDTF, 1, 6);
+        contenedor.add(idLabel,0,0);
+        contenedor.add(idTF,1,0);
+        contenedor.add(nombrePlatilloLabel, 0,1);
+        contenedor.add(nombreTF, 1, 1);
+        contenedor.add(categoriaLabel, 0, 2);
+        contenedor.add(categoriaTF, 1, 2);
+        contenedor.add(descripcionLabel, 0, 3);
+        contenedor.add(descripcionTF, 1, 3);
+        contenedor.add(servidoLabel, 0, 4);
+        contenedor.add(servidoCBox, 1, 4);
+        contenedor.add(tipoPlatilloLabel, 0, 5);
+        contenedor.add(tipoCBox, 1, 5);
+        contenedor.add(ingredientesLabel, 0, 6);
+        contenedor.add(ingredientesTF, 1 , 6);
         contenedor.add(guardar, 0, 7);
         contenedor.add(regresar, 1 , 7);
         
         guardar.setOnAction(e->{
        //codigo para guardar en csv, de seer posible un mensaje
-        	Platillo plato= new Platillo(platilloIDTF.getText(),nombreTF.getText(),user.getRestauranteId(),servidoCBox.getValue(),tipoCBox.getValue(),ingredientesTF.getText(),descripcionTF.getText(),categoriaTF.getText());
+       //(String ID, String nombre, String restauranteId, String servido, String tipo, String ingredientes, String descripcion, String categoria)/
             try {
-				CargaPlatillos.guardarPlatillo(plato);
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+            Platillo p=new Platillo(idTF.getText().trim(),nombreTF.getText(),user.getRestauranteId(),servidoCBox.getValue(),tipoCBox.getValue(),ingredientesTF.getText(),descripcionTF.getText(),categoriaTF.getText());
+
+                CargaPlatillos.guardarPlatillo(p);
+                Stage stage= (Stage) ((Node) e.getSource()).getScene().getWindow();
+                Scene svp = new Scene((new VentanaAsistenteView(user)).getRoot());
+                stage.setScene(svp);
+                stage.show();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+// Logger.getLogger(VentanaAsistenteView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+                
             e.consume();
         
         });
