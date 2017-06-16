@@ -7,12 +7,13 @@
 package Menus;
 
 import catalogo.Platillo;
+import javafx.scene.layout.GridPane;
 
 /**
  *
  * @author Carlos
  */
 public interface OpcionesPlatillos {
-    public void agregarPlatillo();
+    public GridPane agregarPlatillo();
     public void modificarPlatillo(Platillo platillo);
 }

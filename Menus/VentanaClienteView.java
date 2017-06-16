@@ -39,9 +39,9 @@ public class VentanaClienteView{
         root.setAlignment(Pos.CENTER);
         
     }
-    public VentanaClienteView(Usuario user){
+    public VentanaClienteView(Cliente user){
        this.user=user;
-        Label usuario=new Label("Bienvenido "+user.getUsuario());
+        Label usuario=new Label("Bienvenido "+user.getNombre()+" "+user.getApellido());
         
         root=new VBox();
         crearBotones();

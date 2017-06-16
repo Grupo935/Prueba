@@ -50,6 +50,7 @@ public class InicioSesionView {
 		aceptar= new Button("Aceptar");
 		aceptar.setOnMouseClicked(new EventHandler<MouseEvent>() {
 		    public void handle(MouseEvent mouseEvent) {
+                        Stage secondaryStage=(Stage) ((Node) mouseEvent.getSource()).getScene().getWindow(); 
 		    	if (mouseEvent.getButton().equals(MouseButton.PRIMARY)){
 		    		if(tipoUsers.getValue().equals("Asistente")){
 			    		try {
@@ -59,6 +60,10 @@ public class InicioSesionView {
 								if (usuario.getText().equals(asistentes.get(i).getUsuario()) && password.getText().equals(asistentes.get(i).getContrasena())){
 									System.out.println("inicio de sesion exitoso");
 									// aqui va la transicion de ventana de loggin a la ventana para el asistente
+                                                                          Scene sc=new Scene((new VentanaAsistenteView(asistentes.get(i))).getRoot());
+                                                                        secondaryStage.setScene(sc);
+                                                                        secondaryStage.setScene(sc);
+                                                                        mouseEvent.consume();
 								}
 							}
 							
@@ -75,7 +80,12 @@ public class InicioSesionView {
 							for(int i=0;i<clientes.size();i++){
 								if (usuario.getText().equals(clientes.get(i).getUsuario()) && password.getText().equals(clientes.get(i).getContrasena())){
 									System.out.println("inicio de sesion exitoso");
-									// aqui va la transicion de ventana de loggin a la ventana para el Cliente
+                                                                        // aqui va la transicion de ventana de loggin a la ventana para el Cliente
+                                                                        Scene sc=new Scene((new VentanaClienteView(clientes.get(i))).getRoot());
+                                                                        secondaryStage.setScene(sc);
+                                                                        secondaryStage.setScene(sc);
+                                                                        mouseEvent.consume();
+                                                                        
 								}
 							}
 							

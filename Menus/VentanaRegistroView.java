@@ -36,7 +36,7 @@ public class VentanaRegistroView {
     }
     private void crearNodes(){
         labelUsuario=new Label("Nombre de Usuario");
-        labelPSW=new Label("Contraseña");
+        labelPSW=new Label("ContraseÃ±a");
         categoriaUsuario=new ChoiceBox(FXCollections.observableArrayList(
 			    "Asistente", "Cliente", "Administrador"));
         textUsuario=new TextField();
@@ -57,7 +57,7 @@ public class VentanaRegistroView {
            };break;
            
        }
-       //añadir al csv
+       //aï¿½adir al csv
     }
     private void colocarNodes(){
         root.add(labelUsuario, 0, 0);

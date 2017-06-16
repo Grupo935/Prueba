@@ -12,7 +12,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedList;
-
+/*Copy the jar into your project lib folder. 
+Then right click on your project select properties. Now a window opens go 
+to libraries->Add Jar/Folder select your jar and press OK.*/
 /**
  *
  * @author Ana Belen

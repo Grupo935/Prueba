@@ -29,8 +29,10 @@ import javafx.stage.Stage;
 public class VentanaAsistenteView implements MostrarPlatillo,OpcionesPlatillos{
     final private VBox root;
     private Asistente user;
-    private Button agregarUsuario,regresarLogin;
-    VentanaAsistenteView(Usuario user){
+    private Button regresarLogin;
+    
+    VentanaAsistenteView(Asistente user){
+        this.user=user;
         root=new VBox();
         crearBotones();
         
@@ -62,22 +64,68 @@ public class VentanaAsistenteView implements MostrarPlatillo,OpcionesPlatillos{
     }
 
    
+    @Override
     public void mostrarPlatillo(Platillo platillo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      /*  Para mostrar un platillo primero se debe escoger uno de la lista anterior. Los datos a mostrar
+son: Nombre, Servido, Tipo, Restaurante, Categoría, Ingredientes, Imágenes, Descripción. Luego
+debe mostrar el submenú correspondiente
+*/
+              VBox contenedorDetalle=new VBox();
+              Label nombreInfo=new  Label(platillo.getNombre());
+              Label  categoriaInfo=new  Label(platillo.getCategoria());
+              Label  servidoInfo=new  Label(platillo.getServido());
+              Label  tipoInfo=new  Label(platillo.getTipo());
+              //nombre de restaurante?
+              
+              Label restauranteInfo=new Label(platillo.getRestauranteId());
+              Label ingredientesInfo=new Label(platillo.getIngredientes());
+              Label descripcionInfo=new Label(platillo.getDescripcion());
+              contenedorDetalle.getChildren().addAll(restauranteInfo,nombreInfo,categoriaInfo,servidoInfo,tipoInfo,ingredientesInfo,descripcionInfo);
+              Stage stage=new Stage();
+              Scene scene=new Scene(contenedorDetalle);
+              stage.setScene(scene);
+              stage.show();
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void listarPlatillo(LinkedList<Platillo> platillo) {
+        Label nombreInfo,categoriaInfo,servidoInfo,tipoInfo;
+        GridPane contenedorPlatillos=new GridPane();
+        int i=0;
+        
         for(Platillo p:platillo){
             if(p.getRestauranteId().equals(user.getRestauranteId())){
                 
+                VBox contenedorDetalle=new VBox();
+                nombreInfo=new  Label(p.getNombre());
+                categoriaInfo=new  Label(p.getCategoria());
+                servidoInfo=new  Label(p.getServido());
+                tipoInfo=new  Label(p.getTipo());
+                Button escoger=new Button ("Seleccionar");
+                contenedorDetalle.getChildren().addAll(nombreInfo,categoriaInfo,servidoInfo,tipoInfo);
+                contenedorPlatillos.add(contenedorDetalle, 0, i);
+                contenedorPlatillos.add(escoger, 1, i);
+               
+                
+                escoger.setOnAction(e->{
+                    this.mostrarPlatillo(p);
+                    
+                    e.consume();
+                });
+                i++;
+                
+//codigo para listar platillo
+                /*Se muestran todos los platillos que ofrece el restaurante asociado al asistente de restaurante.
+                  Los datos que se deben mostrar son: Nombre, Categoría, Servido y Tipo. Luego se debe mostrar
+                  el submenú correspondiente.*/
             }
         }
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void agregarPlatillo() {
+    public GridPane agregarPlatillo() {
 /*Se deben ingresar los siguientes campos para agregar un platillo nuevo: Nombre, Categoría,
 Descripción, Servido {Caliente, Frío}, Tipo {Aperitivo, Plato fuerte, Postre}, Ingredientes e
 Imágenes. El restaurante debe tomarlo automáticamente de la información del asistente de
@@ -117,14 +165,24 @@ restaurante*/
         contenedor.add(ingredientesTF, 1 , 5);
         contenedor.add(guardar, 0, 6);
         contenedor.add(regresar, 1 , 6);
+        
         guardar.setOnAction(e->{
+       //codigo para guardar en csv, de seer posible un mensaje
             
-        });
-        regresar.setOnAction(e->{
-            
+            e.consume();
+        
         });
         
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        regresar.setOnAction(e->{
+          Stage stage= (Stage) ((Node) e.getSource()).getScene().getWindow();
+          Scene svp=new Scene(this.getRoot());
+          stage.setScene(svp);
+          stage.show();
+          e.consume();  
+        });
+        return contenedor;
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
