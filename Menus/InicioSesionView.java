@@ -60,9 +60,10 @@ public class InicioSesionView {
 								if (usuario.getText().equals(asistentes.get(i).getUsuario()) && password.getText().equals(asistentes.get(i).getContrasena())){
 									System.out.println("inicio de sesion exitoso");
 									// aqui va la transicion de ventana de loggin a la ventana para el asistente
-                                                                          Scene sc=new Scene((new VentanaAsistenteView(asistentes.get(i))).getRoot());
+                                                                         Scene sc=new Scene((new VentanaAsistenteView(asistentes.get(i))).getRoot());
                                                                         secondaryStage.setScene(sc);
                                                                         secondaryStage.setScene(sc);
+                                                                       
                                                                         mouseEvent.consume();
 								}
 							}

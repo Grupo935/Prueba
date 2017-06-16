@@ -2,15 +2,26 @@
 package Menus;
 
 import catalogo.Usuario;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.LinkedList;
+
+import ProcesoDeDatos.CargaPlatillos;
+import ProcesoDeDatos.PresentacionPlatillo;
+import javafx.collections.FXCollections;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import catalogo.*;
 
@@ -19,10 +30,13 @@ import catalogo.*;
  * @author Carlos
  */
 public class VentanaClienteView{
-    private VBox root;
+    private HBox root;
+    private BorderPane contenedorGlobal;
     private Usuario user;
-    private Button categoria,buscarPlatillo,cerrarSesion;
-    private LinkedList<Categoria> listaCategoria;
+    private Button buscarPlatillo,cerrarSesion;
+    private ChoiceBox categorias;
+    private VBox contenedorPlatillos;
+    private LinkedList<Platillo> listaPlatillos;
     
     /*
     Aun queda por modficar esto, pienso que se puede hacer un herencia ejemplo ventanausuario (SuperClass) 
@@ -31,40 +45,45 @@ public class VentanaClienteView{
     
     */
     //que podria recibir para el constructor
-   public VentanaClienteView(){
-        root=new VBox();
+   public VentanaClienteView() throws FileNotFoundException, IOException{
+	   	cargarPlatillos();
+        root=new HBox();
+        contenedorGlobal= new BorderPane();
+        contenedorPlatillos=new VBox();
         crearBotones();
-        root.getChildren().addAll(categoria,buscarPlatillo,cerrarSesion);
+        root.getChildren().addAll(categorias,buscarPlatillo,cerrarSesion);
         root.setSpacing(10);
         root.setAlignment(Pos.CENTER);
+        contenedorGlobal.setCenter(contenedorPlatillos);
+        contenedorGlobal.setTop(root);
+        listarCategoria();
         
     }
-    public VentanaClienteView(Cliente user){
+    public VentanaClienteView(Cliente user) throws FileNotFoundException, IOException{
        this.user=user;
         Label usuario=new Label("Bienvenido "+user.getNombre()+" "+user.getApellido());
-        
-        root=new VBox();
+    	cargarPlatillos();
+        contenedorGlobal= new BorderPane();
+        contenedorPlatillos=new VBox();
+        root=new HBox();
         crearBotones();
-        root.getChildren().addAll(usuario,categoria,buscarPlatillo,cerrarSesion);
+        root.getChildren().addAll(usuario,categorias,buscarPlatillo,cerrarSesion);
+        
         root.setSpacing(10);
         root.setAlignment(Pos.CENTER);
+        contenedorGlobal.setCenter(contenedorPlatillos);
+        contenedorGlobal.setTop(root);
+        listarCategoria();
         
     }
     private void crearBotones(){
-        categoria=new Button("Listar Categoria de platos");
+        categorias=new ChoiceBox(FXCollections.observableArrayList(
+			    "Plato Tipico", "Comida Extranjera", "Desayunos"));
         buscarPlatillo=new Button("Buscar platillos");
         cerrarSesion=new Button("Cerrar Sesion");
         //Evento para 
-        categoria.setOnAction(e->{
-            Stage stage =(Stage) ((Node) e.getSource()).getScene().getWindow(); 
-            Scene scene=new Scene(listarCategoria(listaCategoria));
-            stage.setScene(scene);
-            stage.show();
-            e.consume();
-        });
-        buscarPlatillo.setOnAction(e->{
+        
             
-        });
         cerrarSesion.setOnAction(e->{
            InicioSesionView isv=new InicioSesionView();
            Scene isvs=new Scene(isv.getRoot());
@@ -76,40 +95,53 @@ public class VentanaClienteView{
     }
     //aun queda por modificacion
   
-    private VBox listarCategoria(LinkedList<Categoria> categoria){
-        VBox contenedorListasCategorias=new VBox();
+   private void listarCategoria(){
+	   //este metodo se encargar de presentar los platillos segun las categorias hay un problema con el choice box
+	   categorias.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		   	public void handle(MouseEvent mouseEvent) {
+		   		if (mouseEvent.getButton().equals(MouseButton.PRIMARY)){
+		   			if (categorias.getValue().equals("Plato tipico")){
+		   			   contenedorPlatillos.getChildren().clear();
+		   			   for (int i=0;i<listaPlatillos.size();i++){
+		   				   if (listaPlatillos.get(i).getCategoria().equals("Plato tipico")){
+		   					   PresentacionPlatillo platilloView=new PresentacionPlatillo(listaPlatillos.get(i));
+		   					   contenedorPlatillos.getChildren().add(platilloView.getRoot());
+		   					   
+		   				   }
+		   			   }  
+		   		   }
+		   		   if (categorias.getValue().equals("Desayunos")){
+		   			   contenedorPlatillos.getChildren().clear();
+		   			   for (int i=0;i<listaPlatillos.size();i++){
+		   				   if (listaPlatillos.get(i).getCategoria().equals("Desayunos")){
+		   					   PresentacionPlatillo platilloView=new PresentacionPlatillo(listaPlatillos.get(i));
+		   					   contenedorPlatillos.getChildren().add(platilloView.getRoot());
+		   					   
+		   				   }
+		   			   }  
+		   		   }
+		   		   if (categorias.getValue().equals("Comida Extranjera")){
+		   			   contenedorPlatillos.getChildren().clear();
+		   			   for (int i=0;i<listaPlatillos.size();i++){
+		   				   if (listaPlatillos.get(i).getCategoria().equals("Comida Extranjera")){
+		   					   PresentacionPlatillo platilloView=new PresentacionPlatillo(listaPlatillos.get(i));
+		   					   contenedorPlatillos.getChildren().add(platilloView.getRoot());
+		   					   
+		   				   }
+		   			   }  
+		   		   }
+		   		   else {
+		   			   
+		   		   }
+		   			
+		   			
+		   			
+		   			
+		   		}}});
+	   
         
-        for(Categoria c:categoria){
-        int size=0;
-            if(c.getPlatillos()!=null){
-                size=c.getPlatillos().size();
-            }
-                   
-       
-        HBox contenedorLabel=new HBox();
-        Label labelCategoria=new Label(c.getNombreCategoria());
-        Label labelCantidad=new Label("Existen "+size+"platillos diferentes");
-        Button escoger=new Button("escoger");
-        contenedorLabel.getChildren().addAll(labelCategoria,labelCantidad,escoger);
-        contenedorListasCategorias.getChildren().add(contenedorLabel);
         
-        escoger.setOnAction(e->{
-         
-                //Aqui se necesitaria info de obtencion o un metodo csv para obtener datos de platillo  a base de categoria
-//   mostrarPlatillos(LinkedList<Platillo> listado);
-            e.consume();
-        });
-        }
-        Button retornar=new Button ("Retornar");
-        retornar.setOnAction(e->{
-           Scene retornarScene=new Scene(this.getRoot());
-           Stage stage= (Stage) ((Node) e.getSource()).getScene().getWindow();  
-           stage.setScene(retornarScene);
-           stage.show();
-           e.consume();
-        });
-        contenedorListasCategorias.getChildren().add(retornar);
-        return contenedorListasCategorias;
+        
     }
     private void mostrarPlatillo(Platillo platillo){
         VBox contenedorDetallesPlatillo=new VBox();
@@ -171,8 +203,12 @@ public class VentanaClienteView{
         
     }
     
-    public VBox getRoot(){
-        return root;
+    private void cargarPlatillos() throws FileNotFoundException, IOException{
+    	listaPlatillos= CargaPlatillos.cargaDatos();
+    	
+    }
+    public BorderPane getRoot(){
+        return contenedorGlobal;
     }
 
 }
