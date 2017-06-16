@@ -1,3 +1,20 @@
 plat-001;sancocho;res-001;caliente;plato fuerte;verde * carne;muy rico;Plato Tipico
-plat-002;bolon;res-001;caliente;plato fuerte;verde*chicharron;muy rico;Desayunos
+plat-002;bolon;res-001;caliente;aperitivo;verde*chicharron;muy rico;Desayunos
 plat-003;rissoto;res-001;caliente;plato fuerte;arroz;muy rico;Comida Extranjera
+plat-004;arroz con pollo;res-001;caliente;plato fuerte;arroz*pollo;muy rico;Plato Tipico
+plat-005;arroz con menestra;res-002;caliente;plato fuerte;arroz*menestra;muy rico; Plato Tipico
+plat-006;ceviche;res-002;frio;plato fuerte;pescado;muy rico;Plato Tipico
+plat-007;patacones;res-002;caliente;aperitivo;verde;muy rico;Plato Tipico
+plat-008;helado;res-002;frio;postre;helado;muy rico;Postre
+plat-009;spaghetti;res-003;caliente;plato fuerte;fideos;muy rico;Comida Extranjera
+plat-010;seco de pollo;res-003;caliente;plato fuerte;arroz*pollo;muy rico;Plato Tipico
+plat-011;seco de chancho;res-003;caliente;plato fuerte;arroz*chanco;muy rico;Plato Tipico
+plat-012;locro de papa;res-003;caliente;plato fuerte;papa;muy rico;Plato Tipico
+plat-013;llapingacho;res-004;caliente;plato fuerte;papa*huevo;muy rico;Plato Tipico
+plat-014;churrasco;res-004;caliente;plato fuerte;carne*arroz;muy rico;Plato Tipico
+plat-015;empanada;res-004;caliente;aperitivo;harina*queso;muy rico;Plato Tipico
+plat-016;higos con queso;res-004;frio;postre;higo*queso;muy rico;Postre
+plat-017;hamburguesa;res-005;caliente;plato fuerte;carne*pan;muy rico;Comida Extranjera
+plat-018;hot dog;res-005;caliente;plato fuerte;salchicha*pan;muy rico;Comida Extranjera
+plat-019;taco;res-005;caliente;plato fuerte;tortilla*carne;muy rico;Comida Extranjera
+plat-020;nachos;res-005;frio;aperitivo;nachos*queso;muy rico;Comida Extranjera
