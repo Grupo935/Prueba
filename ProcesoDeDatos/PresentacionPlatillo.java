@@ -9,13 +9,13 @@ public class PresentacionPlatillo {
 	Label nombrePlatillo,servido,tipo,ingredientes,descripcion;
 	Platillo platillo;
 	public PresentacionPlatillo(Platillo platillo){
-		
+		this.platillo=platillo;
 		crear();
 		
 		
 	}
 	private void crear(){
-		this.platillo=platillo;
+		
 		contenedorGlobal= new HBox();
 		nombrePlatillo=new Label();
 		servido=new Label();
@@ -27,6 +27,7 @@ public class PresentacionPlatillo {
 		tipo.setText(platillo.getTipo());
 		ingredientes.setText(platillo.getIngredientes());
 		descripcion.setText(platillo.getDescripcion());
+		contenedorGlobal.setSpacing(20);
 		contenedorGlobal.getChildren().addAll(nombrePlatillo,servido,tipo,ingredientes,descripcion);
 	}
 	

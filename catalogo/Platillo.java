@@ -15,7 +15,7 @@ public class Platillo
     String ID, nombre, descripcion, servido, tipo, ingredientes, categoria, restauranteId;
  
 
-    public Platillo(String ID, String nombre, String restauranteId, String servido, String tipo, String ingredientes, String descripcion, String categoriaId) {
+    public Platillo(String ID, String nombre, String restauranteId, String servido, String tipo, String ingredientes, String descripcion, String categoria) {
         this.nombre = nombre;
         this.categoria = categoria;
         this.restauranteId = restauranteId;

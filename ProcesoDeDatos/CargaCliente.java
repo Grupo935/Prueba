@@ -29,7 +29,7 @@ public class CargaCliente {
         clientes.add(cliente);
      }
            
-            
+     System.out.println(clientes.get(0).getUsuario());        
      return clientes;
     }
     
