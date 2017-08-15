@@ -13,9 +13,10 @@ package catalogo;
 public class Platillo 
 {
     String ID, nombre, descripcion, servido, tipo, ingredientes, categoria, restauranteId;
+    float precio;
  
 
-    public Platillo(String ID, String nombre, String restauranteId, String servido, String tipo, String ingredientes, String descripcion, String categoria) {
+    public Platillo(String ID, String nombre, String restauranteId, String servido, String tipo, String ingredientes, String descripcion, String categoria, float precio) {
         this.nombre = nombre;
         this.categoria = categoria;
         this.restauranteId = restauranteId;
@@ -24,13 +25,22 @@ public class Platillo
         this.tipo = tipo;
         this.ingredientes = ingredientes;
         this.ID = ID;
+        this.precio=precio;
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public String getCategoria() {
+    public float getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(float precio) {
+		this.precio = precio;
+	}
+
+	public String getCategoria() {
         return categoria;
     }
 

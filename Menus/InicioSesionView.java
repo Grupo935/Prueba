@@ -62,7 +62,7 @@ public class InicioSesionView {
 									// aqui va la transicion de ventana de loggin a la ventana para el asistente
                                                                          Scene sc=new Scene((new VentanaAsistenteView(asistentes.get(i))).getRoot());
                                                                         secondaryStage.setScene(sc);
-                                                                        secondaryStage.setScene(sc);
+                                                                      
                                                                        
                                                                         mouseEvent.consume();
 								}

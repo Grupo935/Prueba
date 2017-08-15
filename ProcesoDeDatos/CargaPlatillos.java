@@ -26,7 +26,7 @@ public class CargaPlatillos {
      while ((nextLine = reader.readNext()) != null) {
         // nextLine[] is an array of values from the line
         System.out.println(nextLine[0]);
-        Platillo platillo=new Platillo(nextLine[0],nextLine[1],nextLine[2],nextLine[3],nextLine[4],nextLine[5],nextLine[6],nextLine[7]);
+        Platillo platillo=new Platillo(nextLine[0],nextLine[1],nextLine[2],nextLine[3],nextLine[4],nextLine[5],nextLine[6],nextLine[7],Float.parseFloat(nextLine[8]));
         platillos.add(platillo);
      }
            

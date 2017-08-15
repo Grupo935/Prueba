@@ -1,12 +1,13 @@
 
 package Menus;
-
-import catalogo.Usuario;
-
+import Builder.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.LinkedList;
 
+import ProcesoDeDatos.CargaAdministrador;
+import ProcesoDeDatos.CargaAsistentes;
+import ProcesoDeDatos.CargaCliente;
 import ProcesoDeDatos.CargaPlatillos;
 import ProcesoDeDatos.PresentacionPlatillo;
 import javafx.collections.FXCollections;
@@ -33,8 +34,8 @@ import catalogo.*;
 public class VentanaClienteView{
     private HBox root;
     private BorderPane contenedorGlobal;
-    private Usuario user;
-    private Button buscarPlatilloCat,buscarPlatillo,cerrarSesion;
+    private Cliente user;
+    private Button buscarPlatilloCat,buscarPlatillo,pedido,cerrarSesion;
     private ChoiceBox categorias;
     private TextField buscarTexto;
     private VBox contenedorPlatillos;
@@ -47,20 +48,21 @@ public class VentanaClienteView{
     
     */
     //que podria recibir para el constructor
-   public VentanaClienteView() throws FileNotFoundException, IOException{
+  public VentanaClienteView() throws FileNotFoundException, IOException{
 	   	
         root=new HBox();
         contenedorGlobal= new BorderPane();
         contenedorPlatillos=new VBox();
         crearBotones();
-        root.getChildren().addAll(categorias,buscarPlatilloCat,buscarTexto,buscarPlatillo,cerrarSesion);
+        root.getChildren().addAll(categorias,buscarPlatilloCat,buscarTexto,buscarPlatillo,pedido,cerrarSesion);
         root.setSpacing(10);
-        root.setAlignment(Pos.CENTER);
+        root.setAlignment(Pos.CENTER_LEFT);
         contenedorGlobal.setCenter(contenedorPlatillos);
         contenedorGlobal.setTop(root);
         
         
     }
+ 
     public VentanaClienteView(Cliente user) throws FileNotFoundException, IOException{
     	
     	this.user=user;
@@ -70,7 +72,7 @@ public class VentanaClienteView{
         contenedorPlatillos=new VBox();
         root=new HBox();
         crearBotones();
-        root.getChildren().addAll(categorias,buscarPlatilloCat,buscarTexto,buscarPlatillo,cerrarSesion);
+        root.getChildren().addAll(categorias,buscarPlatilloCat,buscarTexto,buscarPlatillo,pedido,cerrarSesion);
         
         root.setSpacing(10);
         root.setAlignment(Pos.CENTER);
@@ -86,6 +88,18 @@ public class VentanaClienteView{
         buscarTexto = new TextField();
         cerrarSesion=new Button("Cerrar Sesion");
         buscarPlatilloCat=new Button("Buscar por Categoria");
+        pedido= new Button("Realizar pedido");
+       
+      pedido.setOnMouseClicked(e->{
+		    
+                        Stage secondaryStage=(Stage) ((Node) e.getSource()).getScene().getWindow(); 
+                        TipoAlmuerzoView aeb=new TipoAlmuerzoView(this.user);
+                        Scene sc=new Scene(aeb.getRoot());
+                        secondaryStage.setScene(sc);
+                        secondaryStage.show();
+                        e.consume();
+		    });
+
         buscarPlatilloCat.setOnAction(e -> {
         	if (categorias.getValue().equals("Plato Tipico")){
         		try {
@@ -176,7 +190,7 @@ public class VentanaClienteView{
            Scene isvs=new Scene(isv.getRoot());
            Stage stage= (Stage) ((Node) e.getSource()).getScene().getWindow();  
            stage.setScene(isvs);
-           stage.show();
+           
            e.consume();
         });
     }

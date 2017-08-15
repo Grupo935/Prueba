@@ -4,12 +4,14 @@ import catalogo.Platillo;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
-public class PresentacionPlatillo {
+public class PresentacionPlatillo extends HBox{
 	HBox contenedorGlobal;
 	Label nombrePlatillo,servido,tipo,ingredientes,descripcion;
 	Platillo platillo;
 	public PresentacionPlatillo(Platillo platillo){
+		super();
 		this.platillo=platillo;
+		
 		crear();
 		
 		
@@ -29,10 +31,15 @@ public class PresentacionPlatillo {
 		descripcion.setText(platillo.getDescripcion());
 		contenedorGlobal.setSpacing(20);
 		contenedorGlobal.getChildren().addAll(nombrePlatillo,servido,tipo,ingredientes,descripcion);
+		
+		this.getChildren().add(contenedorGlobal);
+		this.setPrefSize(500, 20);
 	}
-	
+	public Platillo getPlatillo() {
+		return platillo;
+	}
 	public HBox getRoot(){
-		return contenedorGlobal;
+		return this.getRoot();
 		
 	}
 
